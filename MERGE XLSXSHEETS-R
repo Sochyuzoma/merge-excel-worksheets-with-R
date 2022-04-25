@@ -1,0 +1,7 @@
+library(readxl)
+library(tidyverse)
+setwd("C:\\Users\\SOCHY\\Desktop\\xlsx") ###set your working directory where your data resides
+sheet = excel_sheets("work.xlsx")
+df = lapply(setNames(sheet, sheet), function(x) read_excel("work.xlsx", sheet=x))
+df = bind_rows(df, .id="Sheet")
+write.xlsx(as.data.frame(df), file="C:\\Users\\SOCHY\\Desktop\\xlsx\\wake.xlsx", sheetName="Sheet1", col.names=TRUE, row.names=FALSE, append=TRUE)
